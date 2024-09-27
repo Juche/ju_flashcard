@@ -1,10 +1,11 @@
 <script setup lang="ts">
   import Flashcard from './components/Flashcard.vue'
+  import Settings from './components/Settings.vue'
 </script>
 
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <Flashcard msg="Flashcard" />
+  <Settings />
+  <Flashcard />
 </template>
 
 <style>
@@ -13,9 +14,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
     overflow: hidden;
+    border-top: 1px solid #eee;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
