@@ -1,11 +1,13 @@
 <script setup lang="ts">
   import Flashcard from './components/Flashcard.vue'
   import Settings from './components/Settings.vue'
+  import StatusBar from './components/StatusBar.vue'
 </script>
 
 <template>
-  <Settings />
   <Flashcard />
+  <Settings />
+  <StatusBar />
 </template>
 
 <style>
@@ -15,10 +17,11 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    padding-bottom: 36px;
     height: 100%;
     width: 100%;
     overflow: hidden;
-    border-top: 1px solid #eee;
+    border: 1px solid #eee;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

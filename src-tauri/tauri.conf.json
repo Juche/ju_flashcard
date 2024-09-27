@@ -11,7 +11,19 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "setFullscreen": true,
+        "startDragging": true
+      }
     },
     "bundle": {
       "active": true,
@@ -55,10 +67,11 @@
     "windows": [
       {
         "fullscreen": false,
+        "width": 800,
         "height": 600,
         "resizable": true,
         "title": "ju_flashcard",
-        "width": 800
+        "decorations": false
       }
     ]
   }
