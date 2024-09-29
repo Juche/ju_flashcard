@@ -64,13 +64,15 @@
     "updater": {
       "active": false
     },
+    "macOSPrivateApi": true,
     "windows": [
       {
+        "title": "ju_flashcard",
         "fullscreen": false,
         "width": 800,
         "height": 600,
         "resizable": true,
-        "title": "ju_flashcard",
+        "transparent": true,
         "decorations": false
       }
     ]
