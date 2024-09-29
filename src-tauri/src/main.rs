@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::Manager;
+use window_shadows::set_shadow;
 use window_vibrancy::*;
 
 fn main() {
@@ -19,6 +20,9 @@ fn main() {
             #[cfg(target_os = "windows")]
             apply_blur(&window, Some((222, 222, 222, 200)))
                 .expect("Unsupported platform! 'apply_blur' is only supported on Windows");
+
+            #[cfg(any(windows, target_os = "macos"))]
+            set_shadow(&window, true).unwrap();
 
             Ok(())
         })

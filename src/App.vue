@@ -21,7 +21,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    border: 1px solid #fff8;
+    /* border: 1px solid #fff8; */
     /* border-radius: 4px; */
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
