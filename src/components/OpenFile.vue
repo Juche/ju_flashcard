@@ -5,7 +5,7 @@
 
     <div v-for="(item, index) in fileList" :key="index">
       <div class="file-item" @click="showImage(item, index)">
-        {{ item.name }} - {{ item.path }} - {{ item.fileHandle }}
+        {{ index }}: {{ item.path }} / {{ item.name }}
       </div>
     </div>
   </div>
@@ -39,9 +39,25 @@
 
   const openFile = async () => {
     const res = await window.showOpenFilePicker({
-      // multiple: true,
+      multiple: true,
     })
-    console.log(res)
+    console.log(`🚀 ~ openFile ~ res:`, res)
+
+    const parseFile = async (obj: any) => {
+      for (const file of res) {
+        if (file.kind === 'file') {
+          filterImage(file.name) &&
+            fileList.value.push({
+              name: file.name,
+              path: '.',
+              fileHandle: file,
+            })
+        }
+      }
+    }
+    await parseFile(res)
+    showImage(fileList.value[0], 0)
+    console.log('--fileList--', fileList)
   }
 
   const openDir = async () => {
@@ -82,11 +98,7 @@
   const filterImage = (fileName: string) => {
     // [图像文件类型与格式指南](https://developer.mozilla.org/zh-CN/docs/Web/Media/Formats/Image_types)
     // .apng / .avif / .bmp / .gif  / .cur / .ico / .jfif / .jpg / .jpeg / .pjpeg / .pjp / .png / .svg / .webp
-    const regex =
-      /\.(apng|avif|bmp|gif|cur|ico|jfif|jpg|jpeg|pjpeg|pjp|png|svg|webp)$/i
 
-    const isImage = regex.test(fileName)
-    return isImage
     // (
     //   fileName.endsWith('.jpg') ||
     //   fileName.endsWith('.jpeg') ||
@@ -100,6 +112,12 @@
     //   fileName.endsWith('.jfif') ||
     //   fileName.endsWith('.avif ')
     // )
+
+    const regex =
+      /\.(apng|avif|bmp|gif|cur|ico|jfif|jpg|jpeg|pjpeg|pjp|png|svg|webp)$/i
+
+    const isImage = regex.test(fileName)
+    return isImage
   }
 
   const showImage = async (item: any, index: number) => {
