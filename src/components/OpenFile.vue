@@ -11,7 +11,7 @@
   </div>
 
   <div class="content">
-    <img v-if="fileList[currentIndex]?.fileHandle" :src="path" />
+    <img v-if="fileList[currentIndex]?.fileHandle" :src="imgSrc" />
   </div>
 
   <!-- <div class="show_code">
@@ -19,7 +19,7 @@
         <code class="lang-dart">
             {{ codeText }}
         </code>
-   </pre>
+    </pre>
   </div> -->
 </template>
 
@@ -35,13 +35,13 @@
   const codeText = ref('')
   const fileList: Ref<TFile[]> = ref([])
   const currentIndex = ref(0)
-  const path = ref()
+  const imgSrc = ref()
 
   const openFile = async () => {
     const res = await window.showOpenFilePicker({
       // multiple: true,
     })
-    console.log(res.length)
+    console.log(res)
   }
 
   const openDir = async () => {
@@ -80,31 +80,40 @@
   // }
 
   const filterImage = (fileName: string) => {
-    // filetype.mime_type() == "image/jpeg"
-    //     || filetype.mime_type() == "image/png"
-    //     || filetype.mime_type() == "image/gif"
-    //     || filetype.mime_type() == "image/webp"
-    //     || filetype.mime_type() == "image/bmp"
-    return (
-      fileName.endsWith('.jpg') ||
-      fileName.endsWith('.jpeg') ||
-      fileName.endsWith('.png') ||
-      fileName.endsWith('.gif') ||
-      fileName.endsWith('.webp') ||
-      fileName.endsWith('.bmp') ||
-      fileName.endsWith('.svg') ||
-      fileName.endsWith('.ico')
-    )
+    // [图像文件类型与格式指南](https://developer.mozilla.org/zh-CN/docs/Web/Media/Formats/Image_types)
+    // .apng / .avif / .bmp / .gif  / .cur / .ico / .jfif / .jpg / .jpeg / .pjpeg / .pjp / .png / .svg / .webp
+    const regex =
+      /\.(apng|avif|bmp|gif|cur|ico|jfif|jpg|jpeg|pjpeg|pjp|png|svg|webp)$/i
+
+    const isImage = regex.test(fileName)
+    return isImage
+    // (
+    //   fileName.endsWith('.jpg') ||
+    //   fileName.endsWith('.jpeg') ||
+    //   fileName.endsWith('.png') ||
+    //   fileName.endsWith('.apng') ||
+    //   fileName.endsWith('.gif') ||
+    //   fileName.endsWith('.webp') ||
+    //   fileName.endsWith('.bmp') ||
+    //   fileName.endsWith('.svg') ||
+    //   fileName.endsWith('.ico') ||
+    //   fileName.endsWith('.jfif') ||
+    //   fileName.endsWith('.avif ')
+    // )
   }
 
   const showImage = async (item: any, index: number) => {
     const file = await item.fileHandle.getFile()
     console.log(`🚀 ~ showImage ~ file:`, file)
 
-    // let reader = new FileReader() // 没有参数
-    // path.value = await reader.readAsDataURL(file)
-    path.value = URL.createObjectURL(file)
-    console.log(`🚀 ~ showImage ~ path:`, path.value)
+    // const reader = new FileReader();
+    // reader.onload = (e) => {
+    //   img.src = e.target.result;
+    // };
+    // reader.readAsDataURL(file);
+
+    imgSrc.value = URL.createObjectURL(file)
+    console.log(`🚀 ~ showImage ~ imgSrc:`, imgSrc.value)
   }
 </script>
 
