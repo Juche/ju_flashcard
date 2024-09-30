@@ -11,7 +11,7 @@
   </div>
 
   <div class="content">
-    <img v-if="fileList[currentIndex]?.fileHandle" :src="file" />
+    <img v-if="fileList[currentIndex]?.fileHandle" :src="path" />
   </div>
 
   <!-- <div class="show_code">
@@ -24,12 +24,18 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { Ref, ref } from 'vue'
+
+  type TFile = {
+    name: string
+    path: string
+    fileHandle: Function
+  }
 
   const codeText = ref('')
-  const fileList = ref([])
+  const fileList: Ref<TFile[]> = ref([])
   const currentIndex = ref(0)
-  const file = ref()
+  const path = ref()
 
   const openFile = async () => {
     const res = await window.showOpenFilePicker({
@@ -40,41 +46,65 @@
 
   const openDir = async () => {
     const res = await window.showDirectoryPicker({})
-    const detalAction = async (obj: any) => {
+    const parseFile = async (obj: any) => {
       if (obj.entries) {
         const dirs = obj.entries()
         for await (const entry of dirs) {
           if (entry[1].entries) {
             // 文件夹，递归处理
-            detalAction(entry[1])
+            parseFile(entry[1])
           } else {
             // 文件
-            fileList.value.push({
-              name: entry[0],
-              path: obj.name,
-              fileHandle: entry[1],
-            })
+            filterImage(entry[0]) &&
+              fileList.value.push({
+                name: entry[0],
+                path: obj.name,
+                fileHandle: entry[1],
+              })
           }
         }
       }
     }
-    await detalAction(res)
-    showCode(fileList.value[0], 0)
+    await parseFile(res)
+    showImage(fileList.value[0], 0)
     console.log('--fileList--', fileList)
   }
 
-  const showCode = async (item: any, index: number) => {
-    const file = await item.fileHandle.getFile()
-    console.log(`🚀 ~ showCode ~ file:`, file)
-    const text = await file.text()
-    console.log(`🚀 ~ showCode ~ text:`, text)
-    codeText.value = text
-    currentIndex.value = index
+  // const showCode = async (item: any, index: number) => {
+  //   const file = await item.fileHandle.getFile()
+  //   console.log(`🚀 ~ showCode ~ file:`, file)
+  //   const text = await file.text()
+  //   console.log(`🚀 ~ showCode ~ text:`, text)
+  //   codeText.value = text
+  //   currentIndex.value = index
+  // }
+
+  const filterImage = (fileName: string) => {
+    // filetype.mime_type() == "image/jpeg"
+    //     || filetype.mime_type() == "image/png"
+    //     || filetype.mime_type() == "image/gif"
+    //     || filetype.mime_type() == "image/webp"
+    //     || filetype.mime_type() == "image/bmp"
+    return (
+      fileName.endsWith('.jpg') ||
+      fileName.endsWith('.jpeg') ||
+      fileName.endsWith('.png') ||
+      fileName.endsWith('.gif') ||
+      fileName.endsWith('.webp') ||
+      fileName.endsWith('.bmp') ||
+      fileName.endsWith('.svg') ||
+      fileName.endsWith('.ico')
+    )
   }
 
   const showImage = async (item: any, index: number) => {
-    file.value = await item.fileHandle.getFile()
-    console.log(`🚀 ~ showCode ~ file:`, file.value)
+    const file = await item.fileHandle.getFile()
+    console.log(`🚀 ~ showImage ~ file:`, file)
+
+    // let reader = new FileReader() // 没有参数
+    // path.value = await reader.readAsDataURL(file)
+    path.value = URL.createObjectURL(file)
+    console.log(`🚀 ~ showImage ~ path:`, path.value)
   }
 </script>
 
