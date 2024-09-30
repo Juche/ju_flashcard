@@ -1,9 +1,9 @@
 <template>
   <div class="file-tree">
-    <button class="open_file" @click="openFile">打开文件</button>
+    <!-- <button class="open_file" @click="openFile">打开文件</button> -->
     <button class="open_file" @click="openDir">打开文件夹</button>
 
-    <div v-for="(item, index) in fileList" :key="index">
+    <div v-for="(item, index) in imageList" :key="index">
       <div class="file-item" @click="showImage(item, index)">
         {{ index }}: {{ item.path }} / {{ item.name }}
       </div>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="content">
-    <img v-if="fileList[currentIndex]?.fileHandle" :src="imgSrc" />
+    <img v-if="imageList[currentIndex]?.fileHandle" :src="imgSrc" />
   </div>
 
   <!-- <div class="show_code">
@@ -33,32 +33,33 @@
   }
 
   const codeText = ref('')
-  const fileList: Ref<TFile[]> = ref([])
+  const imageList: Ref<TFile[]> = ref([])
+  const mediaList: Ref<TFile[]> = ref([])
   const currentIndex = ref(0)
   const imgSrc = ref()
 
-  const openFile = async () => {
-    const res = await window.showOpenFilePicker({
-      multiple: true,
-    })
-    console.log(`🚀 ~ openFile ~ res:`, res)
+  // const openFile = async () => {
+  //   const res = await window.showOpenFilePicker({
+  //     multiple: true,
+  //   })
+  //   console.log(`🚀 ~ openFile ~ res:`, res)
 
-    const parseFile = async (obj: any) => {
-      for (const file of res) {
-        if (file.kind === 'file') {
-          filterImage(file.name) &&
-            fileList.value.push({
-              name: file.name,
-              path: '.',
-              fileHandle: file,
-            })
-        }
-      }
-    }
-    await parseFile(res)
-    showImage(fileList.value[0], 0)
-    console.log('--fileList--', fileList)
-  }
+  //   const parseFile = async (obj: any) => {
+  //     for (const file of res) {
+  //       if (file.kind === 'file') {
+  //         filterImage(file.name) &&
+  //           imageList.value.push({
+  //             name: file.name,
+  //             path: '.',
+  //             fileHandle: file,
+  //           })
+  //       }
+  //     }
+  //   }
+  //   await parseFile(res)
+  //   showImage(imageList.value[0], 0)
+  //   console.log('--imageList--', imageList)
+  // }
 
   const openDir = async () => {
     const res = await window.showDirectoryPicker({})
@@ -72,18 +73,26 @@
           } else {
             // 文件
             filterImage(entry[0]) &&
-              fileList.value.push({
+              imageList.value.push({
                 name: entry[0],
                 path: obj.name,
                 fileHandle: entry[1],
               })
           }
+
+          filterMedia(entry[0]) &&
+            mediaList.value.push({
+              name: entry[0],
+              path: obj.name,
+              fileHandle: entry[1],
+            })
         }
       }
     }
     await parseFile(res)
-    showImage(fileList.value[0], 0)
-    console.log('--fileList--', fileList)
+    showImage(imageList.value[0], 0)
+    console.log('--imageList--', imageList)
+    console.log('--mediaList--', mediaList)
   }
 
   // const showCode = async (item: any, index: number) => {
@@ -118,6 +127,10 @@
 
     const isImage = regex.test(fileName)
     return isImage
+  }
+
+  const filterMedia = (fileName: string) => {
+    return fileName.endsWith('.mp3') || fileName.endsWith('.wav')
   }
 
   const showImage = async (item: any, index: number) => {
