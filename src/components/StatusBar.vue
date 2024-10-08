@@ -1,62 +1,20 @@
 <template>
   <div data-tauri-drag-region class="status-bar">
-    <div class="play-ctrl">
-      <div class="status-icon" @click="">
-        <img src="https://api.iconify.design/line-md:round-360.svg" />
-      </div>
-      <div class="status-icon" @click="">
-        <!-- <img src="https://api.iconify.design/mingcute:random-line.svg" /> -->
-        <img src="https://api.iconify.design/fe:random.svg" />
-      </div>
-      <div class="status-icon" @click="">
-        <img src="https://api.iconify.design/line-md:play.svg" />
-      </div>
-
-      <div class="status-icon" @click="">
-        <img src="https://api.iconify.design/line-md:volume-high.svg" />
-      </div>
-    </div>
-
-    <div class="window-ctrl">
-      <div class="status-icon" @click="appWindow.close">
-        <img src="https://api.iconify.design/line-md:close.svg" />
-      </div>
-      <div class="status-icon" @click="appWindow.minimize">
-        <img src="https://api.iconify.design/line-md:minus.svg" />
-      </div>
-      <div class="status-icon" @click="toggleMaximize">
-        <img
-          v-if="!isMaxSize"
-          src="https://api.iconify.design/line-md:monitor-arrow-up.svg"
-        />
-        <img
-          v-else
-          src="https://api.iconify.design/line-md:monitor-arrow-down.svg"
-        />
-      </div>
-    </div>
-
-    <div class="menu-ctrl">
-      <div class="status-icon status-icon-config" @click="">
-        <img src="https://api.iconify.design/line-md:cog-loop.svg" />
-      </div>
-    </div>
+    <Folder />
+    <Play />
+    <Window />
+    <Menu />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { appWindow } from '@tauri-apps/api/window'
-  import { ref } from 'vue'
-
-  const isMaxSize = ref(false)
-
-  function toggleMaximize() {
-    isMaxSize.value = !isMaxSize.value
-    appWindow.toggleMaximize()
-  }
+  import Folder from './Handles/Folder.vue'
+  import Menu from './Handles/Menu.vue'
+  import Play from './Handles/Play.vue'
+  import Window from './Handles/Window.vue'
 </script>
 
-<style scoped>
+<style>
   .status-bar {
     display: flex;
     /* flex-direction: row-reverse; */
@@ -71,15 +29,18 @@
     user-select: none;
   }
 
-  .play-ctrl {
+  .open-folder {
     /* align-self: center; */
     background: #f003;
   }
-  .window-ctrl {
+  .play-ctrl {
     background: #0f03;
   }
-  .menu-ctrl {
+  .window-ctrl {
     background: #00f3;
+  }
+  .menu-ctrl {
+    background: #f0f3;
   }
 
   .status-icon {
@@ -90,7 +51,7 @@
     height: 32px;
   }
   .status-icon:hover {
-    background: #5bbec3;
+    background: #0006;
   }
   .status-icon img {
     width: 20px;
