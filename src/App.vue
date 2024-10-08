@@ -1,14 +1,16 @@
 <script setup lang="ts">
-  import OpenFile from './components/OpenFile.vue'
+  // import OpenFile from './components/OpenFile.vue'
   // import Flashcard from './components/Flashcard.vue'
   // import Settings from './components/Settings.vue'
   import StatusBar from './components/StatusBar.vue'
+  import ViewPanel from './components/ViewPanel.vue'
 </script>
 
 <template>
-  <OpenFile />
+  <!-- <OpenFile /> -->
   <!-- <Flashcard />
   <Settings /> -->
+  <ViewPanel />
   <StatusBar />
 </template>
 

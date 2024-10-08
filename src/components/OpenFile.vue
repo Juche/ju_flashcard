@@ -1,5 +1,5 @@
 <template>
-  <div class="side-bar">
+  <div class="folder-panel">
     <!-- <button class="open_file" @click="openFile">打开文件</button> -->
     <button class="open_file" @click="openDir">打开文件夹</button>
 
@@ -154,7 +154,7 @@
 </script>
 
 <style scoped>
-  .side-bar {
+  .folder-panel {
     /* display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -186,11 +186,16 @@
     width: 70%;
     height: 100%;
     /* border-left: 1px solid #eee; */
-    overflow: auto;
+    /* overflow: auto; */
   }
 
   .content img {
-    width: 80%;
-    /* box-shadow: 0 0 6px #ccc; */
+    /* width: 80%; */
+    /* max-width: 90%;
+    max-height: 90%;
+    object-fit: cover; */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 </style>
