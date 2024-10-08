@@ -76,8 +76,6 @@
   // Import Swiper Vue.js components
   import { Swiper, SwiperSlide } from 'swiper/vue'
 
-  import '../style.css'
-
   // Import Swiper styles
   import 'swiper/css'
   import 'swiper/css/effect-cards'

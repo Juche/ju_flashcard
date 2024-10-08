@@ -1,10 +1,15 @@
 <template>
-  <div class="file-tree">
+  <div class="side-bar">
     <!-- <button class="open_file" @click="openFile">打开文件</button> -->
     <button class="open_file" @click="openDir">打开文件夹</button>
 
-    <div v-for="(item, index) in imageList" :key="index">
-      <div class="file-item" @click="showImage(item, index)">
+    <div class="file-tree">
+      <div
+        class="file-item ellipsis"
+        v-for="(item, index) in imageList"
+        :key="index"
+        @click="showImage(item, index)"
+      >
         {{ index }}: {{ item.path }} / {{ item.name }}
       </div>
     </div>
@@ -149,16 +154,29 @@
 </script>
 
 <style scoped>
-  .file-tree {
-    display: flex;
+  .side-bar {
+    /* display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start; */
     width: 30%;
     height: 100%;
+    overflow: auto;
+  }
+
+  .file-tree {
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start; */
   }
 
   .file-item {
-    line-height: 36px;
-    border-bottom: 1px solid #eee;
+    padding: 0 10px;
+    width: 100%;
+    line-height: 50px;
+    box-sizing: border-box;
+    /* border-bottom: 1px solid #eee; */
   }
 
   .content {
@@ -167,6 +185,12 @@
     justify-content: center;
     width: 70%;
     height: 100%;
-    border-left: 1px solid #eee;
+    /* border-left: 1px solid #eee; */
+    overflow: auto;
+  }
+
+  .content img {
+    width: 80%;
+    /* box-shadow: 0 0 6px #ccc; */
   }
 </style>

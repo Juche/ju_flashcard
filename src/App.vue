@@ -13,11 +13,13 @@
 </template>
 
 <style>
+  @import url(./style.css);
+
   #app {
     /* margin-top: 60px; */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
     box-sizing: border-box;
     padding-bottom: 50px;
     height: 100%;
@@ -28,7 +30,6 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
   }
 </style>
