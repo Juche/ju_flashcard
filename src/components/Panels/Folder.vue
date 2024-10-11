@@ -34,7 +34,7 @@
   // const imageList: Ref<TFile[]> = ref([])
   // const mediaList: Ref<TFile[]> = ref([])
   // const currentIndex = ref(0)
-  // const imgSrc = ref()
+  // const imageSrc = ref()
 </script>
 
 <style scoped>

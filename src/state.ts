@@ -4,7 +4,7 @@ import { Ref, ref } from 'vue'
 export const imageList: Ref<TFile[]> = ref([])
 export const mediaList: Ref<TFile[]> = ref([])
 export const currentIndex = ref(0)
-export const imgSrc = ref()
+export const imageSrc = ref()
 export const audioSrc = ref()
 
 async function getObjURL(list: TFile[], index: number) {
@@ -24,8 +24,8 @@ async function getObjURL(list: TFile[], index: number) {
 }
 
 export const switchCard = async (index: number) => {
-  imgSrc.value = await getObjURL(imageList.value, index)
-  console.log(`🚀 ~ switchCard ~ imgSrc:`, imgSrc.value)
+  imageSrc.value = await getObjURL(imageList.value, index)
+  console.log(`🚀 ~ switchCard ~ imageSrc:`, imageSrc.value)
   audioSrc.value = await getObjURL(mediaList.value, index)
   console.log(`🚀 ~ switchCard ~ audioSrc:`, audioSrc.value)
 }

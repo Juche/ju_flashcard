@@ -16,7 +16,7 @@
   </div>
 
   <div class="content">
-    <img v-if="imageList[currentIndex]?.fileHandle" :src="imgSrc" />
+    <img v-if="imageList[currentIndex]?.fileHandle" :src="imageSrc" />
   </div>
 
   <!-- <div class="show_code">
@@ -41,7 +41,7 @@
   const imageList: Ref<TFile[]> = ref([])
   const mediaList: Ref<TFile[]> = ref([])
   const currentIndex = ref(0)
-  const imgSrc = ref()
+  const imageSrc = ref()
 
   // const openFile = async () => {
   //   const res = await window.showOpenFilePicker({
@@ -148,8 +148,8 @@
     // };
     // reader.readAsDataURL(file);
 
-    imgSrc.value = URL.createObjectURL(file)
-    console.log(`🚀 ~ showImage ~ imgSrc:`, imgSrc.value)
+    imageSrc.value = URL.createObjectURL(file)
+    console.log(`🚀 ~ showImage ~ imageSrc:`, imageSrc.value)
   }
 </script>
 

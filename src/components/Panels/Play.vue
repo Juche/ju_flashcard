@@ -1,28 +1,101 @@
 <template>
-  <div class="content">
-    <img v-if="imageList[currentIndex]?.fileHandle" :src="imgSrc" />
-  </div>
-</template>
+  <!-- :centeredSlides="true" -->
+  <!-- :spaceBetween="30" -->
 
+  <!-- <img v-if="imageList[currentIndex]?.fileHandle" :src="imageSrc" /> -->
+  <!-- <h1>{{ JSON.stringify(imageList) }}</h1> -->
+  <!-- <h1>{{ imageSrc }}</h1>
+  <h1>{{ audioSrc }}</h1> -->
+  <!-- <h1>{{ imageList.length }}</h1> -->
+
+  <swiper
+    v-if="imageList.length"
+    :autoplay="{
+      delay: 2500,
+      disableOnInteraction: false,
+    }"
+    :grabCursor="true"
+    :effect="'cube'"
+    :cubeEffect="{
+      shadow: true,
+      slideShadows: true,
+      shadowOffset: 20,
+      shadowScale: 0.94,
+    }"
+    :keyboard="{
+      enabled: true,
+    }"
+    :loop="true"
+    :modules="modules"
+    :navigation="true"
+    :pagination="{
+      clickable: true,
+      type: 'fraction', // 数字分页
+    }"
+    :slidesPerView="1"
+    :zoom="true"
+  >
+    <swiper-slide v-for="item in imageList.length" :key="item">
+      <!-- {{ item.name }} -->
+      <div class="swiper-zoom-container">
+        <!-- <img src="https://swiperjs.com/demos/images/nature-1.jpg" /> -->
+        <img :src="imageSrc" />
+      </div>
+    </swiper-slide>
+  </swiper>
+</template>
 <script setup lang="ts">
-  import { currentIndex, imageList, imgSrc } from '../../state'
+  // Import Swiper Vue.js components
+  import { Swiper, SwiperSlide } from 'swiper/vue'
+  import { imageList, imageSrc } from '../../state'
+
+  // Import Swiper styles
+  import 'swiper/css'
+  import 'swiper/css/effect-cards'
+  import 'swiper/css/effect-creative'
+  import 'swiper/css/effect-cube'
+  import 'swiper/css/navigation'
+  import 'swiper/css/pagination'
+  import 'swiper/css/zoom'
+
+  // import required modules
+  import {
+    Autoplay,
+    EffectCards,
+    EffectCreative,
+    EffectCube,
+    Keyboard,
+    Navigation,
+    Pagination,
+    Zoom,
+  } from 'swiper/modules'
+
+  const modules = [
+    Autoplay,
+    EffectCards,
+    EffectCreative,
+    EffectCube,
+    Keyboard,
+    Pagination,
+    Navigation,
+    Zoom,
+  ]
 </script>
 
-<style scoped>
-  .content {
+<style>
+  .swiper {
+    height: 80%;
+    max-width: 80%;
+  }
+
+  .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70%;
-    height: 100%;
-    /* border-left: 1px solid #eee; */
-    overflow: auto;
-  }
-
-  .content img {
-    /* width: 80%; */
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    border-radius: 18px;
+    /* background: #0006; */
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
   }
 </style>
