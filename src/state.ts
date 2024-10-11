@@ -50,4 +50,7 @@ export const menuVisible = ref(false)
 export const showSetting = ref(false)
 export const dirReverse = ref(false)
 
+// TODO: 多种切换模式配置
+// TODO: 状态栏状态模式配置
+
 /* 状态栏状态 END */

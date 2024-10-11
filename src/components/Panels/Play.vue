@@ -11,10 +11,10 @@
   <swiper
     v-if="imageList.length"
     :autoplay="{
-      delay: 5000,
+      delay: duration,
       disableOnInteraction: false,
     }"
-    :grabCursor="true"
+    :grabCursor="!autoplay"
     :effect="'cube'"
     :cubeEffect="{
       shadow: true,
@@ -23,19 +23,21 @@
       shadowScale: 0.94,
     }"
     :keyboard="{
-      enabled: true,
+      enabled: !autoplay,
     }"
     :loop="true"
     :modules="modules"
-    :navigation="true"
+    :navigation="!autoplay"
     :pagination="{
-      clickable: true,
+      clickable: !autoplay,
       type: 'fraction', // 数字分页
     }"
     :slidesPerView="1"
     :zoom="true"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
+    @navigationPrev="onNavigationPrev"
+    @navigationNext="onNavigationNext"
   >
     <swiper-slide v-for="item in imageList.length" :key="item">
       <!-- {{ item.name }} -->
@@ -49,7 +51,14 @@
 <script setup lang="ts">
   // Import Swiper Vue.js components
   import { Swiper, SwiperSlide } from 'swiper/vue'
-  import { currentIndex, imageList, imageSrc, switchCard } from '../../state'
+  import {
+    autoplay,
+    currentIndex,
+    duration,
+    imageList,
+    imageSrc,
+    switchCard,
+  } from '../../state'
 
   // Import Swiper styles
   import 'swiper/css'
@@ -88,10 +97,22 @@
   }
   function onSlideChange() {
     console.log('swiper slideChange')
+    if (!autoplay.value) return
+
     setTimeout(() => {
       currentIndex.value = (currentIndex.value + 1) % imageList.value.length
       switchCard()
     }, 120)
+  }
+
+  // TODO: 自动发播放和手动操作互斥!!!
+  function onNavigationPrev() {
+    console.log('swiper navigationPrev')
+    currentIndex.value = (currentIndex.value - 1) % imageList.value.length
+  }
+  function onNavigationNext() {
+    console.log('swiper navigationNext')
+    currentIndex.value = (currentIndex.value + 1) % imageList.value.length
   }
 </script>
 
