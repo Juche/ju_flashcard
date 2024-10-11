@@ -1,9 +1,17 @@
 <template>
-  <div data-tauri-drag-region class="status-bar">
-    <Folder />
-    <Play />
-    <Window />
-    <Menu />
+  <div
+    data-tauri-drag-region
+    :class="{ 'status-bar': true, 'dir-reverse': dirReverse }"
+  >
+    <div :class="{ 'status-grp': true, 'dir-reverse': dirReverse }">
+      <Turn />
+      <Folder />
+    </div>
+    <div :class="{ 'status-grp': true, 'dir-reverse': dirReverse }">
+      <Play />
+      <Window />
+      <Menu />
+    </div>
   </div>
 </template>
 
@@ -11,15 +19,18 @@
   import Folder from './Handles/Folder.vue'
   import Menu from './Handles/Menu.vue'
   import Play from './Handles/Play.vue'
+  import Turn from './Handles/Turn.vue'
   import Window from './Handles/Window.vue'
+
+  import { dirReverse } from '../state'
 </script>
 
 <style>
   .status-bar {
     display: flex;
     /* flex-direction: row-reverse; */
-    justify-content: flex-end;
-    align-items: flex-end;
+    /* justify-content: flex-end; */
+    justify-content: space-between;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -27,6 +38,15 @@
     height: 50px;
     background: #fff8;
     user-select: none;
+  }
+
+  .status-grp {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .dir-reverse {
+    flex-direction: row-reverse;
   }
 
   .open-folder {
@@ -47,7 +67,8 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 32px;
+    padding: 0 10px;
+    /* width: 32px; */
     height: 32px;
   }
   .status-icon:hover {

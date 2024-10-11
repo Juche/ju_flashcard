@@ -1,5 +1,6 @@
 <template>
   <div class="open-folder">
+    <!-- 优化加强样式 & 清空按钮??? -->
     <div class="status-icon" @click="openDir">
       <img src="https://api.iconify.design/line-md:folder.svg" />
     </div>
@@ -7,19 +8,8 @@
 </template>
 
 <script setup lang="ts">
-  import { imageList, mediaList, showImage } from '../../state'
+  import { imageList, mediaList, switchCard } from '../../state'
   import { filterImage, filterMedia } from '../../utils'
-
-  // type TFile = {
-  //   name: string
-  //   path: string
-  //   fileHandle: Function
-  // }
-
-  // const imageList: Ref<TFile[]> = ref([])
-  // const mediaList: Ref<TFile[]> = ref([])
-  // const currentIndex = ref(0)
-  // const imgSrc = ref()
 
   const openDir = async () => {
     imageList.value = []
@@ -28,7 +18,7 @@
     const res = await window.showDirectoryPicker({})
     await parseFile(res)
 
-    showImage(imageList.value[0], 0)
+    switchCard(0)
 
     console.log('--imageList--', imageList)
     console.log('--mediaList--', mediaList)
@@ -58,22 +48,18 @@
             fileHandle: entry[1],
           })
       }
+
+      imageList.value = sortFileList(imageList.value)
+      mediaList.value = sortFileList(mediaList.value)
     }
   }
 
-  // const showImage = async (item: any, index: number) => {
-  //   const file = await item.fileHandle.getFile()
-  //   console.log(`🚀 ~ showImage ~ file:`, file)
-
-  //   // const reader = new FileReader();
-  //   // reader.onload = (e) => {
-  //   //   img.src = e.target.result;
-  //   // };
-  //   // reader.readAsDataURL(file);
-
-  //   imgSrc.value = URL.createObjectURL(file)
-  //   console.log(`🚀 ~ showImage ~ imgSrc:`, imgSrc.value)
-  // }
+  function sortFileList(list: TFile[]) {
+    return list.sort(
+      // TODO: 根据文件拓展命名规则进行匹配排序
+      (a, b) => Number(a.name.split('.')[0]) - Number(b.name.split('.')[0]),
+    )
+  }
 </script>
 
 <style lang="scss" scoped></style>

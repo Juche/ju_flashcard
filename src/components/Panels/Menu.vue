@@ -1,13 +1,7 @@
 <template>
   <div class="menu">
-    <!-- <iframe
-      src="https://www.baidu.com/"
-      width="100%"
-      height="100%"
-      frameborder="0"
-    ></iframe> -->
     <img src="../../assets/logo.png" />
-    <div id="content">
+    <!-- div id="content">
       <div id="exercise">
         <h1 class="dictionary">The Vowels</h1>
         <div id="pd">
@@ -272,7 +266,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

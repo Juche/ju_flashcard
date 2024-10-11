@@ -5,7 +5,7 @@
         class="file-item ellipsis"
         v-for="(item, index) in imageList"
         :key="index"
-        @click="showImage(item, index)"
+        @click="switchCard(index)"
       >
         {{ index }}: {{ item.path }} / {{ item.name }}
       </div>
@@ -14,7 +14,8 @@
 </template>
 
 <script setup lang="ts">
-  import { imageList, showImage } from '../../state'
+  import { imageList, switchCard } from '../../state'
+  console.log(`🚀 ~ imageList 2:`, imageList)
 
   // import { Ref, ref } from 'vue'
 

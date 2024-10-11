@@ -6,19 +6,6 @@
 
 <script setup lang="ts">
   import { currentIndex, imageList, imgSrc } from '../../state'
-
-  // import { Ref, ref } from 'vue'
-
-  // type TFile = {
-  //   name: string
-  //   path: string
-  //   fileHandle: Function
-  // }
-
-  // const imageList: Ref<TFile[]> = ref([])
-  // const mediaList: Ref<TFile[]> = ref([])
-  // const currentIndex = ref(0)
-  // const imgSrc = ref()
 </script>
 
 <style scoped>
