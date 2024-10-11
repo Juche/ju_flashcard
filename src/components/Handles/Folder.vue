@@ -18,7 +18,7 @@
     const res = await window.showDirectoryPicker({})
     await parseFile(res)
 
-    switchCard(0)
+    switchCard()
 
     console.log('--imageList--', imageList)
     console.log('--mediaList--', mediaList)

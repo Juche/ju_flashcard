@@ -11,7 +11,7 @@
   <swiper
     v-if="imageList.length"
     :autoplay="{
-      delay: 2500,
+      delay: 5000,
       disableOnInteraction: false,
     }"
     :grabCursor="true"
@@ -34,6 +34,8 @@
     }"
     :slidesPerView="1"
     :zoom="true"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
   >
     <swiper-slide v-for="item in imageList.length" :key="item">
       <!-- {{ item.name }} -->
@@ -47,7 +49,7 @@
 <script setup lang="ts">
   // Import Swiper Vue.js components
   import { Swiper, SwiperSlide } from 'swiper/vue'
-  import { imageList, imageSrc } from '../../state'
+  import { currentIndex, imageList, imageSrc, switchCard } from '../../state'
 
   // Import Swiper styles
   import 'swiper/css'
@@ -80,6 +82,17 @@
     Navigation,
     Zoom,
   ]
+
+  function onSwiper() {
+    console.log('swiper initialized')
+  }
+  function onSlideChange() {
+    console.log('swiper slideChange')
+    setTimeout(() => {
+      currentIndex.value = (currentIndex.value + 1) % imageList.value.length
+      switchCard()
+    }, 120)
+  }
 </script>
 
 <style>

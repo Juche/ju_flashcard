@@ -5,36 +5,22 @@
         class="file-item ellipsis"
         v-for="(item, index) in imageList"
         :key="index"
-        @click="switchCard(index)"
+        @click="chooseCard(index)"
       >
-        {{ index }}: {{ item.path }} / {{ item.name }}
+        <!-- {{ index }}: {{ item.path }} / {{ item.name }} -->
+        {{ item.path }}/{{ item.name }}
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { imageList, switchCard } from '../../state'
-  console.log(`🚀 ~ imageList 2:`, imageList)
+  import { currentIndex, imageList, switchCard } from '../../state';
 
-  // import { Ref, ref } from 'vue'
-
-  // defineProps({
-  //   imageList: {
-  //     type: Array,
-  //   },
-  // })
-
-  // type TFile = {
-  //   name: string
-  //   path: string
-  //   fileHandle: Function
-  // }
-
-  // const imageList: Ref<TFile[]> = ref([])
-  // const mediaList: Ref<TFile[]> = ref([])
-  // const currentIndex = ref(0)
-  // const imageSrc = ref()
+  const chooseCard = (index: number) => {
+    currentIndex.value = index
+    switchCard()
+  }
 </script>
 
 <style scoped>

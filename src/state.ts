@@ -10,7 +10,6 @@ export const audioSrc = ref()
 async function getObjURL(list: TFile[], index: number) {
   const item = list[index]
   const file = await item.fileHandle.getFile()
-  console.log(`🚀 ~ switchCard ~ file:`, file)
 
   // const reader = new FileReader();
   // reader.onload = (e) => {
@@ -23,10 +22,10 @@ async function getObjURL(list: TFile[], index: number) {
   return objURL
 }
 
-export const switchCard = async (index: number) => {
-  imageSrc.value = await getObjURL(imageList.value, index)
+export const switchCard = async () => {
+  imageSrc.value = await getObjURL(imageList.value, currentIndex.value)
   console.log(`🚀 ~ switchCard ~ imageSrc:`, imageSrc.value)
-  audioSrc.value = await getObjURL(mediaList.value, index)
+  audioSrc.value = await getObjURL(mediaList.value, currentIndex.value)
   console.log(`🚀 ~ switchCard ~ audioSrc:`, audioSrc.value)
 }
 
@@ -35,11 +34,17 @@ export const switchCard = async (index: number) => {
 /* 状态栏状态 START */
 
 // playMode: 0-顺序播放 1-随机播放
+// autoplay: true-自动播放 false-不自动播放
+// duration: 5000ms-播放时长
+// loopPlay: true-循环播放 false-不循环
 // isPlaying: false-暂停 true-播放
 // menuVisible: true-菜单可见 false-菜单不可见
 // showSetting: true-设置可见 false-设置不可见
 // dirReverse: true-状态栏倒序 false-状态栏正序
 export const playMode = ref(0)
+export const autoplay = ref(true)
+export const duration = ref(5000)
+export const loopPlay = ref(true)
 export const isPlaying = ref(false)
 export const menuVisible = ref(false)
 export const showSetting = ref(false)
