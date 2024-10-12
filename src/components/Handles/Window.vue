@@ -1,5 +1,11 @@
 <template>
-  <div class="window-ctrl">
+  <div
+    :class="{
+      'handle-ctn': true,
+      'window-ctrl': true,
+      'dir-reverse': dirReverse,
+    }"
+  >
     <div class="status-icon" @click="appWindow.close">
       <img src="https://api.iconify.design/line-md:close.svg" />
     </div>
@@ -22,6 +28,7 @@
 <script lang="ts" setup>
   import { appWindow } from '@tauri-apps/api/window'
   import { ref } from 'vue'
+  import { dirReverse } from '../../state'
 
   const isMaxSize = ref(false)
 

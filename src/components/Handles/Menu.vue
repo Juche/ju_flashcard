@@ -1,6 +1,6 @@
 <template>
-  <div class="menu-ctrl">
-    <div class="status-icon status-icon-config" @click="">
+  <div class="handle-ctn menu-ctrl">
+    <div class="status-icon" @click="">
       <img src="https://api.iconify.design/line-md:cog-loop.svg" />
     </div>
   </div>

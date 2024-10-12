@@ -1,6 +1,12 @@
 <template>
   <!-- 没有闪卡内容时不显示播放功能键 -->
-  <div class="play-ctrl">
+  <div
+    :class="{
+      'handle-ctn': true,
+      'play-ctrl': true,
+      'dir-reverse': dirReverse,
+    }"
+  >
     <!-- 播放模式切换 -->
     <div class="status-icon" @click="togglePlayMode">
       <img src="https://api.iconify.design/line-md:round-360.svg" />
@@ -35,7 +41,7 @@
 <script lang="ts" setup>
   import { ref } from 'vue'
 
-  import { autoplay, currentIndex, mediaList } from '../../state'
+  import { autoplay, currentIndex, dirReverse, mediaList } from '../../state'
 
   const audioRef = ref()
 

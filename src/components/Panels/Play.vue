@@ -10,6 +10,7 @@
 
   <swiper
     v-if="imageList.length"
+    class="flashcard-swiper"
     :autoplay="
       autoplay
         ? {
@@ -61,7 +62,7 @@
     </swiper-slide>
 
     <template #container-end>
-      <div class="autoplay-progress">
+      <div class="autoplay-progress" v-if="autoplay">
         <svg viewBox="0 0 48 48" ref="progressCircle">
           <circle cx="24" cy="24" r="20"></circle>
         </svg>
@@ -160,7 +161,7 @@
 
 <style>
   .swiper {
-    height: 80%;
+    height: 90%;
     max-width: 80%;
   }
 

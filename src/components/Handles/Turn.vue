@@ -1,5 +1,5 @@
 <template>
-  <div class="turn">
+  <div class="handle-ctn turn">
     <!-- 状态栏翻转 -->
     <div class="status-icon" @click="reverseDir">
       <img src="https://api.iconify.design/line-md:arrows-horizontal.svg" />

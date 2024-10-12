@@ -4,8 +4,8 @@
     :class="{ 'status-bar': true, 'dir-reverse': dirReverse }"
   >
     <div :class="{ 'status-grp': true, 'dir-reverse': dirReverse }">
-      <Turn />
       <Folder />
+      <Turn />
     </div>
     <div :class="{ 'status-grp': true, 'dir-reverse': dirReverse }">
       <Play />
@@ -42,7 +42,13 @@
 
   .status-grp {
     display: flex;
-    align-items: flex-end;
+    /* align-items: flex-end; */
+    align-items: center;
+  }
+
+  .handle-ctn {
+    display: flex;
+    height: 36px;
   }
 
   .dir-reverse {
@@ -51,16 +57,21 @@
 
   .open-folder {
     /* align-self: center; */
-    background: #f003;
+    height: 50px;
+    /* background: #f003; */
   }
   .play-ctrl {
-    background: #0f03;
+    /* background: #0f03; */
   }
   .window-ctrl {
-    background: #00f3;
+    /* background: #00f3; */
   }
   .menu-ctrl {
-    background: #f0f3;
+    /* padding: 0; */
+    /* width: 50px; */
+    height: 50px;
+    /* background: #f0f3; */
+    /* border-radius: 50%; */
   }
 
   .status-icon {
@@ -69,17 +80,32 @@
     align-items: center;
     padding: 0 10px;
     /* width: 32px; */
-    height: 32px;
+    height: 100%;
   }
   .status-icon:hover {
-    background: #0006;
+    background: #0002;
   }
   .status-icon img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
-  .status-icon-config img {
+
+  .menu-ctrl .status-icon {
+    /* padding: 0; */
+    /* width: 100%; */
+  }
+  .menu-ctrl .status-icon img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .play-ctrl .status-icon img {
     width: 32px;
     height: 32px;
+  }
+
+  .open-folder .status-icon img {
+    width: 45px;
+    height: 45px;
   }
 </style>
