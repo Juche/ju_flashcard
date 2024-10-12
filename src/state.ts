@@ -1,5 +1,7 @@
 import { Ref, ref } from 'vue'
 
+export const swiperRef = ref()
+
 /* 图片 & 音频状态 START */
 export const imageList: Ref<TFile[]> = ref([])
 export const mediaList: Ref<TFile[]> = ref([])
@@ -23,10 +25,14 @@ export async function getObjURL(list: TFile[], index: number) {
 }
 
 export const switchCard = async () => {
-  imageSrc.value = await getObjURL(imageList.value, currentIndex.value)
-  console.log(`🚀 ~ switchCard ~ imageSrc:`, imageSrc.value)
-  audioSrc.value = await getObjURL(mediaList.value, currentIndex.value)
-  console.log(`🚀 ~ switchCard ~ audioSrc:`, audioSrc.value)
+  // swiperRef.value?.$el.swiper.updateSlides()
+  // swiperRef.value?.$el.swiper.slideTo(currentIndex.value, 0, false)
+  // TODO: 这里切换索引依然有问题，待优化
+  swiperRef.value?.$el.swiper.slideToLoop(currentIndex.value, 200, false)
+  // imageSrc.value = await getObjURL(imageList.value, currentIndex.value)
+  // console.log(`🚀 ~ switchCard ~ imageSrc:`, imageSrc.value)
+  // audioSrc.value = await getObjURL(mediaList.value, currentIndex.value)
+  // console.log(`🚀 ~ switchCard ~ audioSrc:`, audioSrc.value)
 }
 
 /* 图片 & 音频状态 END */

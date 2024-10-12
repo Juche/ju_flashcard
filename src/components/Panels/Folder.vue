@@ -18,6 +18,7 @@
   import { currentIndex, imageList, switchCard } from '../../state'
 
   const chooseCard = (index: number) => {
+    console.log(`🚀 ~ chooseCard ~ index:`, index)
     currentIndex.value = index
     switchCard()
   }

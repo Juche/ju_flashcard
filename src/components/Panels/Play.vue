@@ -10,6 +10,7 @@
 
   <swiper
     v-if="imageList.length"
+    ref="swiperRef"
     class="flashcard-swiper"
     :autoplay="
       autoplay
@@ -74,7 +75,13 @@
 <script setup lang="ts">
   // Import Swiper Vue.js components
   import { Swiper, SwiperSlide } from 'swiper/vue'
-  import { autoplay, currentIndex, duration, imageList } from '../../state'
+  import {
+    autoplay,
+    currentIndex,
+    duration,
+    imageList,
+    swiperRef,
+  } from '../../state'
 
   // Import Swiper styles
   import 'swiper/css'
