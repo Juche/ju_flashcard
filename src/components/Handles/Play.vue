@@ -15,20 +15,21 @@
     </div>
     <!-- 播放(不显示左右切换按钮) & 暂停状态 -->
     <div class="status-icon" @click="toggleAutoPlay">
-      <img src="https://api.iconify.design/line-md:play.svg" />
+      <!-- <img src="https://api.iconify.design/line-md:play.svg" /> -->
       <img
+        v-if="autoplay"
         src="https://api.iconify.design/line-md:play-to-pause-transition.svg"
       />
       <img
+        v-else
         src="https://api.iconify.design/line-md:pause-to-play-transition.svg"
       />
     </div>
     <!-- 播放时的声音动画 -->
     <div class="status-icon" @click="audioPlay">
       <img src="https://api.iconify.design/line-md:volume-high.svg" />
-      <img src="https://api.iconify.design/line-md:volume-low.svg" />
-      <img src="https://api.iconify.design/line-md:volume-medium.svg" />
-      <!-- src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" -->
+      <!-- <img src="https://api.iconify.design/line-md:volume-low.svg" />
+      <img src="https://api.iconify.design/line-md:volume-medium.svg" /> -->
       <audio
         ref="audioRef"
         :autoplay="autoplay"
@@ -39,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue'
+  import { nextTick, ref } from 'vue'
 
   import {
     autoplay,
@@ -48,6 +49,7 @@
     imageList,
     isRandom,
     mediaList,
+    swiperRef,
     switchCard,
   } from '../../state'
   import { sortFileList } from '../../utils'
@@ -76,6 +78,14 @@
   function toggleAutoPlay() {
     autoplay.value = !autoplay.value
     console.log(`🚀 ~ autoPlay ~ autoplay.value:`, autoplay.value)
+
+    nextTick(() => {
+      autoplay.value
+        ? swiperRef.value?.$el.swiper.autoplay.start()
+        : swiperRef.value?.$el.swiper.autoplay.stop()
+
+      autoplay.value && audioPlay()
+    })
   }
 
   function audioPlay() {

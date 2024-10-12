@@ -8,21 +8,21 @@
       <Turn />
     </div>
     <div :class="{ 'status-grp': true, 'dir-reverse': dirReverse }">
-      <Play />
+      <Play v-if="imageList.length" />
       <Window />
-      <Menu />
+      <!-- <Menu /> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import Folder from './Handles/Folder.vue'
-  import Menu from './Handles/Menu.vue'
+  // import Menu from './Handles/Menu.vue'
   import Play from './Handles/Play.vue'
   import Turn from './Handles/Turn.vue'
   import Window from './Handles/Window.vue'
 
-  import { dirReverse } from '../state'
+  import { dirReverse, imageList } from '../state'
 </script>
 
 <style>
