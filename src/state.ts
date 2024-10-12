@@ -7,7 +7,7 @@ export const currentIndex = ref(0)
 export const imageSrc = ref()
 export const audioSrc = ref()
 
-async function getObjURL(list: TFile[], index: number) {
+export async function getObjURL(list: TFile[], index: number) {
   const item = list[index]
   const file = await item.fileHandle.getFile()
 
@@ -42,7 +42,7 @@ export const switchCard = async () => {
 // showSetting: true-设置可见 false-设置不可见
 // dirReverse: true-状态栏倒序 false-状态栏正序
 export const playMode = ref(0)
-export const autoplay = ref(true)
+export const autoplay = ref(false)
 export const duration = ref(5000)
 export const loopPlay = ref(true)
 export const isPlaying = ref(false)
@@ -51,6 +51,7 @@ export const showSetting = ref(false)
 export const dirReverse = ref(false)
 
 // TODO: 多种切换模式配置
+const effect = ref('cube') // 'slide', 'fade', 'cube', 'coverflow', 'flip', 'creative' or 'cards'
 // TODO: 状态栏状态模式配置
 
 /* 状态栏状态 END */

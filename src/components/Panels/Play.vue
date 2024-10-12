@@ -10,10 +10,14 @@
 
   <swiper
     v-if="imageList.length"
-    :autoplay="{
-      delay: duration,
-      disableOnInteraction: false,
-    }"
+    :autoplay="
+      autoplay
+        ? {
+            delay: duration,
+            disableOnInteraction: false,
+          }
+        : false
+    "
     :grabCursor="!autoplay"
     :effect="'cube'"
     :cubeEffect="{
@@ -32,13 +36,18 @@
       clickable: !autoplay,
       type: 'fraction', // 数字分页
     }"
+    :simulateTouch="!autoplay"
     :slidesPerView="1"
     :zoom="true"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
     @navigationPrev="onNavigationPrev"
     @navigationNext="onNavigationNext"
+    @transitionEnd="transitionEnd"
+    @transitionStart="transitionStart"
   >
+    <!-- @touchMove="onTouchMove"
+    @touchMoveOpposite="onTouchMoveOpposite" -->
     <swiper-slide v-for="item in imageList.length" :key="item">
       <!-- {{ item.name }} -->
       <div class="swiper-zoom-container">
@@ -96,24 +105,44 @@
     console.log('swiper initialized')
   }
   function onSlideChange() {
-    console.log('swiper slideChange')
-    if (!autoplay.value) return
-
-    setTimeout(() => {
-      currentIndex.value = (currentIndex.value + 1) % imageList.value.length
-      switchCard()
-    }, 120)
+    // console.log('swiper slideChange')
+    // if (!autoplay.value) return
+    // setTimeout(() => {
+    //   currentIndex.value = (currentIndex.value + 1) % imageList.value.length
+    //   switchCard()
+    // }, 120)
   }
 
   // TODO: 自动发播放和手动操作互斥!!!
   function onNavigationPrev() {
     console.log('swiper navigationPrev')
     currentIndex.value = (currentIndex.value - 1) % imageList.value.length
+    switchCard()
   }
   function onNavigationNext() {
     console.log('swiper navigationNext')
     currentIndex.value = (currentIndex.value + 1) % imageList.value.length
+    switchCard()
   }
+
+  function transitionEnd(swiper: any) {
+    // swipeDirection: "prev"
+    // swipeDirection: "next"
+    console.log('swiper transitionEnd')
+    console.log(`🚀 ~ transitionEnd ~ swiper:`, swiper)
+  }
+  function transitionStart(swiper: any) {
+    // swipeDirection: "prev"
+    // swipeDirection: "next"
+    console.log('swiper transitionStart')
+    console.log(`🚀 ~ transitionStart ~ swiper:`, swiper)
+  }
+  // function onTouchMove() {
+  //   // console.log('swiper onTouchMove')
+  // }
+  // function onTouchMoveOpposite() {
+  //   // console.log('swiper onTouchMoveOpposite')
+  // }
 </script>
 
 <style>
