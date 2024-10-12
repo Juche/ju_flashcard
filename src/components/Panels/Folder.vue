@@ -8,7 +8,7 @@
         @click="chooseCard(index)"
       >
         <!-- {{ index }}: {{ item.path }} / {{ item.name }} -->
-        {{ item.path }}/{{ item.name }}
+        <img class="preview" :src="item.src" />{{ item.name }}
       </div>
     </div>
   </div>
@@ -38,10 +38,18 @@
   }
 
   .file-item {
-    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
     width: 100%;
-    line-height: 50px;
+    /* line-height: 50px; */
     box-sizing: border-box;
     /* border-bottom: 1px solid #eee; */
+    font-weight: bold;
+  }
+
+  .file-item .preview {
+    width: 36px;
+    margin-right: 10px;
   }
 </style>
