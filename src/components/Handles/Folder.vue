@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-  import { imageList, mediaList, switchCard } from '../../state'
+  import { currentIndex, imageList, mediaList } from '../../state'
   import { filterImage, filterMedia } from '../../utils'
 
   const openDir = async () => {
@@ -18,7 +18,8 @@
     const res = await window.showDirectoryPicker({})
     await parseFile(res)
 
-    switchCard()
+    // switchCard()
+    currentIndex.value = 0
 
     console.log('--imageList--', imageList)
     console.log('--mediaList--', mediaList)
@@ -38,6 +39,7 @@
               name: entry[0],
               path: obj.name,
               fileHandle: entry[1],
+              src: URL.createObjectURL(await entry[1].getFile()),
             })
         }
 
@@ -46,6 +48,7 @@
             name: entry[0],
             path: obj.name,
             fileHandle: entry[1],
+            src: URL.createObjectURL(await entry[1].getFile()),
           })
       }
 

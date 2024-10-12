@@ -23,7 +23,11 @@
       <img src="https://api.iconify.design/line-md:volume-low.svg" />
       <img src="https://api.iconify.design/line-md:volume-medium.svg" />
       <!-- src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" -->
-      <audio ref="audioRef" :autoplay="autoplay" :src="audioSrc" />
+      <audio
+        ref="audioRef"
+        :autoplay="autoplay"
+        :src="mediaList[currentIndex]?.src"
+      />
     </div>
   </div>
 </template>
@@ -31,7 +35,7 @@
 <script lang="ts" setup>
   import { ref } from 'vue'
 
-  import { audioSrc, autoplay } from '../../state'
+  import { autoplay, currentIndex, mediaList } from '../../state'
 
   const audioRef = ref()
 

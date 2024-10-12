@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  import { currentIndex, imageList, switchCard } from '../../state';
+  import { currentIndex, imageList, switchCard } from '../../state'
 
   const chooseCard = (index: number) => {
     currentIndex.value = index

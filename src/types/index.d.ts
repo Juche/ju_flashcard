@@ -9,5 +9,6 @@ declare global {
     name: string
     path: string
     fileHandle: any
+    src?: string
   }
 }
