@@ -39,7 +39,7 @@ export const switchCard = async () => {
 
 /* 状态栏状态 START */
 
-// playMode: 0-顺序播放 1-随机播放
+// isRandom: true-随机播放 false-顺序播放
 // autoplay: true-自动播放 false-不自动播放
 // duration: 5000ms-播放时长
 // loopPlay: true-循环播放 false-不循环
@@ -47,7 +47,7 @@ export const switchCard = async () => {
 // menuVisible: true-菜单可见 false-菜单不可见
 // showSetting: true-设置可见 false-设置不可见
 // dirReverse: true-状态栏倒序 false-状态栏正序
-export const playMode = ref(0)
+export const isRandom = ref(false)
 export const autoplay = ref(false)
 export const duration = ref(5000)
 export const loopPlay = ref(true)
