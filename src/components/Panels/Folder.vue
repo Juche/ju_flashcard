@@ -1,6 +1,6 @@
 <template>
   <div class="folder-panel">
-    <div :class="['file-tree', isOpen ? '' : 'fold']">
+    <div :class="['file-tree', listView ? '' : 'fold']">
       <div
         class="file-item ellipsis"
         v-for="(item, index) in imageList"
@@ -11,24 +11,21 @@
         <img class="preview" :src="item.src" />{{ item.name }}
       </div>
     </div>
-    <div class="toggle" @click="isOpen = !isOpen">
+    <!-- <div class="toggle" @click="listView = !listView">
       <img
-        v-if="isOpen"
+        v-if="listView"
         src="https://api.iconify.design/line-md:chevron-double-left.svg"
       />
       <img
         v-else
         src="https://api.iconify.design/line-md:chevron-double-right.svg"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { currentIndex, imageList, switchCard } from '../../state'
-
-  const isOpen = ref(false)
+  import { currentIndex, imageList, listView, switchCard } from '../../state'
 
   const chooseCard = (index: number) => {
     console.log(`🚀 ~ chooseCard ~ index:`, index)
@@ -51,6 +48,7 @@
   .file-tree {
     width: 180px;
     height: 100%;
+    overflow: auto;
     background: #f3f3f3;
     box-shadow: 0 -10px 10px #0003;
     /* display: flex;
@@ -58,7 +56,7 @@
       align-items: flex-start;
       justify-content: flex-start; */
     transition-property: all;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
   }
 
   .file-tree.fold {
@@ -72,7 +70,6 @@
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
-    /* border-bottom: 1px solid #eee; */
     font-weight: bold;
   }
 
@@ -82,9 +79,11 @@
   }
 
   .toggle {
-    width: 20px;
-    line-height: 100px;
+    width: 24px;
+    line-height: 66px;
     background: #f3f3f3;
-    box-shadow: 3px -3px 4px #0002;
+    box-shadow: 3px -3px 5px #0002;
+    border-radius: 0 20px 0 0;
+    text-align: center;
   }
 </style>

@@ -57,7 +57,9 @@ export const showSetting = ref(false)
 export const dirReverse = ref(false)
 
 // TODO: 多种切换模式配置
-const effect = ref('cube') // 'slide', 'fade', 'cube', 'coverflow', 'flip', 'creative' or 'cards'
+export const effect = ref('cube') // 'slide', 'fade', 'cube', 'coverflow', 'flip', 'creative' or 'cards'
 // TODO: 状态栏状态模式配置
+export const listView = ref(false)
+export const menuView = ref(false)
 
 /* 状态栏状态 END */

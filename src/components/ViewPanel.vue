@@ -1,12 +1,12 @@
 <template>
   <Folder />
   <Play />
-  <!-- <Menu /> -->
+  <Menu />
 </template>
 
 <script lang="ts" setup>
   import Folder from './Panels/Folder.vue'
-  // import Menu from './Panels/Menu.vue'
+  import Menu from './Panels/Menu.vue'
   import Play from './Panels/Play.vue'
 </script>
 

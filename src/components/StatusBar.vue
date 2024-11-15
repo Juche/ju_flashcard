@@ -5,19 +5,21 @@
   >
     <div :class="{ 'status-grp': true, 'dir-reverse': dirReverse }">
       <Folder />
+      <List v-if="imageList.length" />
       <Turn />
     </div>
     <div :class="{ 'status-grp': true, 'dir-reverse': dirReverse }">
       <Play v-if="imageList.length" />
       <Window />
-      <!-- <Menu /> -->
+      <Menu />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import Folder from './Handles/Folder.vue'
-  // import Menu from './Handles/Menu.vue'
+  import List from './Handles/List.vue'
+  import Menu from './Handles/Menu.vue'
   import Play from './Handles/Play.vue'
   import Turn from './Handles/Turn.vue'
   import Window from './Handles/Window.vue'
@@ -58,19 +60,19 @@
   .open-folder {
     /* align-self: center; */
     height: 50px;
-    /* background: #f003; */
+    /* background: #00f3; */
+    background: #f0f3;
   }
   .play-ctrl {
-    /* background: #0f03; */
+    background: #0f03;
   }
   .window-ctrl {
-    /* background: #00f3; */
+    background: #f003;
   }
   .menu-ctrl {
     /* padding: 0; */
     /* width: 50px; */
     height: 50px;
-    /* background: #f0f3; */
     /* border-radius: 50%; */
   }
 
