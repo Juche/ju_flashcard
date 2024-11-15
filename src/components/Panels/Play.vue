@@ -168,8 +168,9 @@
 
 <style>
   .swiper {
+    width: 100%;
     height: 90%;
-    max-width: 80%;
+    /* max-width: 80%; */
   }
 
   .swiper-slide {
