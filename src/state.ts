@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue'
+import { computed, Ref, ref } from 'vue'
 
 export const swiperRef = ref()
 
@@ -41,7 +41,6 @@ export const switchCard = async () => {
 
 // isRandom: true-随机播放 false-顺序播放
 // autoplay: true-自动播放 false-不自动播放
-// duration: 5000ms-播放时长
 // loopPlay: true-循环播放 false-不循环
 // isPlaying: false-暂停 true-播放
 // menuVisible: true-菜单可见 false-菜单不可见
@@ -49,16 +48,38 @@ export const switchCard = async () => {
 // dirReverse: true-状态栏倒序 false-状态栏正序
 export const isRandom = ref(false)
 export const autoplay = ref(false)
-export const duration = ref(5000)
 export const loopPlay = ref(true)
 export const isPlaying = ref(false)
 export const menuVisible = ref(false)
 export const showSetting = ref(false)
 export const dirReverse = ref(false)
 
-// TODO: 多种切换模式配置
-export const effect = ref('cube') // 'slide', 'fade', 'cube', 'coverflow', 'flip', 'creative' or 'cards'
-// TODO: 状态栏状态模式配置
+// TODO: 配置菜单
+export const _duration = ref(5)
+export const _effect = ref('cube')
+
+export const duration = computed(() => {
+  return (Number(localStorage.getItem('duration')) || _duration.value) * 1000 || 5000
+})
+// effect: 轮播切换模式配置
+// cube: 立方体 / effect: 滚动 / cards: 卡牌 / flip: 翻转
+export const effect = computed(() => {
+  return localStorage.getItem('effect') || _effect.value
+})
+
+export const changeDuration = () => {
+  // duration.value = Number(value)
+  localStorage.setItem('duration', String(_duration.value))
+}
+export const changeEffect = () => {
+  // effect.value = value
+  localStorage.setItem('effect', _effect.value!)
+}
+
+// 状态栏布局左右
+// 默认播放模式
+
+// 文件和菜单面板配置
 export const listView = ref(false)
 export const menuView = ref(false)
 

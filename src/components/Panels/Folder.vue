@@ -49,8 +49,9 @@
     width: 180px;
     height: 100%;
     overflow: auto;
-    background: #f3f3f3;
-    box-shadow: 0 -10px 10px #0003;
+    /* background: #f3f3f3; */
+    background: #fff8;
+    box-shadow: 0 -8px 10px #0003;
     /* display: flex;
       flex-direction: column;
       align-items: flex-start;

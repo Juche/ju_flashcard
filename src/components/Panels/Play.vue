@@ -21,7 +21,19 @@
         : false
     "
     :grabCursor="!autoplay"
-    :effect="'cube'"
+    :effect="effect"
+    :creativeEffect="{
+      prev: {
+        shadow: true,
+        translate: ['-125%', 0, -800],
+        rotate: [0, 0, -90],
+      },
+      next: {
+        shadow: true,
+        translate: ['125%', 0, -800],
+        rotate: [0, 0, 90],
+      },
+    }"
     :cubeEffect="{
       shadow: true,
       slideShadows: false,
@@ -33,7 +45,7 @@
     }"
     :loop="true"
     :modules="modules"
-    :navigation="!autoplay"
+    :navigation="false"
     :pagination="{
       // clickable: !autoplay,
       // type: 'fraction', // 数字分页
@@ -79,6 +91,7 @@
     autoplay,
     currentIndex,
     duration,
+    effect,
     imageList,
     swiperRef,
   } from '../../state'
@@ -88,6 +101,7 @@
   import 'swiper/css/effect-cards'
   import 'swiper/css/effect-creative'
   import 'swiper/css/effect-cube'
+  import 'swiper/css/effect-flip'
   import 'swiper/css/navigation'
   import 'swiper/css/pagination'
   import 'swiper/css/zoom'
@@ -98,6 +112,7 @@
     EffectCards,
     EffectCreative,
     EffectCube,
+    EffectFlip,
     Keyboard,
     Navigation,
     Pagination,
@@ -110,6 +125,7 @@
     EffectCards,
     EffectCreative,
     EffectCube,
+    EffectFlip,
     Keyboard,
     Pagination,
     Navigation,
